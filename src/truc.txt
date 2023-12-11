@@ -1,0 +1,5 @@
+- interface loader -> plugins pour charger les perso et objets en JSON et en dur
+- hook pour gérer ce qui se passe à la fin du tour (un nouveau truc)
+- un hook pour gérer à chaque action si il existe un plugin chargé qu'il faut utiliser
+- compteur d'action, une action à un coût
+-plugin = implémentation d'une interface
