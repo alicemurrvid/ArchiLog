@@ -1,6 +1,6 @@
 {
     "Zombie" :{
-        "Damage":"2",
+        "Damage":2,
         "Items":[
             "Leather armor"
         ],

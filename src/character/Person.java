@@ -19,17 +19,18 @@ public class Person {
 	private ArrayList<Item> inventory;
 	private ArrayList<Action> actions;
 	private ArrayList<Stat> stats;
+	private ArrayList<Stat> basicsStats;
 	private int lifePoint;
 	
 	/**
 	 * Constructor of Character
 	 * @param nameCharacter
 	 */
-	public Person(String nameCharacter, int lp) {
+	public Person(String nameCharacter, long lp, ArrayList<Stat> bs) {
 		this.inventory = new ArrayList<Item>();
 		this.actions = new ArrayList<Action>();
 		this.stats = new ArrayList<Stat>();
-
+		
 		if (nameCharacter != null && nameCharacter.length() > 0 && nameCharacter.length() < 20) {
 			this.nameCharacter = nameCharacter;
 		} else if (nameCharacter == null) {
@@ -38,7 +39,8 @@ public class Person {
 			// Error to lauch "Le nom du personnage doit comporter entre 1 et 20 caractères"
 		}
 		this.setActions();
-		this.lifePoint = lp;
+		this.lifePoint = (int) lp;
+		this.basicsStats = bs;
 	}
 	
 	/**
@@ -65,12 +67,7 @@ public class Person {
 	 */
 	private void resetStats() {
 		this.stats.clear();
-		Stat strength = new Stat("Strength", 1);
-		Stat resistance = new Stat("Resistance", 1);
-		ArrayList<Stat> resetStats = new ArrayList<Stat>();
-		resetStats.add(strength);
-		resetStats.add(resistance);
-		this.stats = resetStats;
+		this.stats = this.basicsStats;
 	}
 	
 	/**
@@ -128,6 +125,6 @@ public class Person {
 	@Override
 	public String toString() {
 		return "Person [nameCharacter=" + nameCharacter + ", inventory=" + inventory + ", actions=" + actions
-				+ ", stats=" + stats + ", lifePoint=" + lifePoint + "]";
+				+ ", stats=" + stats + ", basics stats=" + basicsStats + ", lifePoint=" + lifePoint + "]";
 	}
 }
