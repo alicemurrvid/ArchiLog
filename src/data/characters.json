@@ -1,9 +1,0 @@
-{
-    "Zombie" :{
-        "Damage":"2",
-        "Items":[
-            "Leather armor"
-        ],
-        "LifePoint" : 5
-    }
-}
