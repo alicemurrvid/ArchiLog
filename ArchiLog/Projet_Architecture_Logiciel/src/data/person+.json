@@ -1,0 +1,17 @@
+{
+    "Minotaur" :{
+        "Damage":15,
+        "Items":[
+            "Wooden shield"
+        ],
+        "LifePoint" : 50
+    },
+    "War lord":{
+        "Damage":10,
+        "Items":[
+            "Leather Armor",
+            "Wooden sword"
+        ],
+        "LifePoint":20
+    }
+}
