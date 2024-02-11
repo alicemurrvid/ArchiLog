@@ -5,5 +5,13 @@
             "Leather armor"
         ],
         "LifePoint" : 5
+    },
+    "Pig Of War":{
+        "Damage":2,
+        "Items":[
+            "Wooden shield",
+            "Wooden sword"
+        ],
+        "LifePoint":10
     }
 }

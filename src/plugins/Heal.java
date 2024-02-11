@@ -2,7 +2,11 @@ package plugins;
 
 import interfaces.Action;
 
-public class Heal extends Action {
+/**
+ * Heal
+ * @author mschneider
+ */
+public class Heal implements Action {
 
 	public Heal() {}
 	

@@ -2,7 +2,11 @@ package plugins;
 
 import interfaces.Action;
 
-public class Flee extends Action{
+/**
+ * Flee
+ * @author mschneider
+ */
+public class Flee implements Action{
 
 	public Flee() {}
 

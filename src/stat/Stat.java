@@ -1,5 +1,9 @@
 package stat;
 
+/**
+ * Stat
+ * @author mschneider
+ */
 public class Stat {
 	
 	// Attributs of a Stat

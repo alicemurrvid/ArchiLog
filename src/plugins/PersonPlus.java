@@ -15,63 +15,29 @@ import org.json.simple.parser.ParseException;
 
 import character.Person;
 import equipment.Item;
-import interfaces.ILoadData;
+import game.Run;
+import interfaces.IContent;
 import stat.Stat;
 
-/**
- * DataLoader
- * @author mschneider
- *
- */
-public class DataLoader implements ILoadData{
+public class PersonPlus implements IContent {
 
-	private static final String CHARACTERSCONFIGPATH = "src/data/characters.json";
-	private static final String ITEMSCONFIGPATH = "src/data/items.json";
-
-	public DataLoader() {}
-
-	/**
-	 * initialize the items list of the game8 by a JSON file
-	 * @retun itemList : Arraylist<Item>
-	 */
-	@SuppressWarnings("rawtypes")
-	public ArrayList<Item> initializeItems() {
-		
-		ArrayList<Item> itemList = new ArrayList<Item>();
-		JSONParser jsonParser = new JSONParser();
-		
-		try (FileReader reader = new FileReader(ITEMSCONFIGPATH)){
-			JSONObject obj = (JSONObject) jsonParser.parse(reader);
-			if (! obj.isEmpty()) {
-				@SuppressWarnings("unchecked")
-				Set<String> keys = obj.keySet();
-				for (String key : keys) {
-					ArrayList<Stat> stats = new ArrayList<Stat>();
-					if (((HashMap) obj.get(key)).get("Defense") != null) {
-						stats.add(new Stat("Defense",(long)((HashMap) obj.get(key)).get("Defense")));
-					}
-					if (((HashMap) obj.get(key)).get("Damage") != null) {
-						stats.add(new Stat("Damage",(long)((HashMap) obj.get(key)).get("Damage")));
-					}
-					itemList.add(new Item(key,stats));
-				}
-			}
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		return itemList;
+	private static final String CHARACTERSCONFIGPATH = "src/data/person+.json";
+	public ArrayList<Person> contentToAdd;
+	
+	public void add() {
+		Run.getInstance().addPeopleOnList(this.contentToAdd);
+	}
+	
+	public void remove() {
+		Run.getInstance().removePeopleOnList(this.contentToAdd);
 	}
 	
 	/**
 	 * initialize the characters list of the game by a JSON file
-	 * @return personList : ArrayList<Person>
 	 */
 	@SuppressWarnings("rawtypes")
-	public ArrayList<Person> initializeCharacters(ArrayList<Item> items) {
+	public void initialize() {
+		ArrayList<Item> items = Run.getInstance().getItems();
 		ArrayList<Person> personList = new ArrayList<Person>();
 		JSONParser jsonParser = new JSONParser();
 
@@ -120,7 +86,6 @@ public class DataLoader implements ILoadData{
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		return personList;
+		this.contentToAdd = personList;
 	}
-
 }

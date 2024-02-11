@@ -2,7 +2,11 @@ package plugins;
 
 import interfaces.Action;
 
-public class Attack extends Action {
+/**
+ * Attack
+ * @author mschneider
+ */
+public class Attack implements Action {
 
 	public Attack(){}
 

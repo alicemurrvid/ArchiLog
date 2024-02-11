@@ -2,7 +2,11 @@ package plugins;
 
 import interfaces.Action;
 
-public class Defend extends Action{
+/**
+ * Defend
+ * @author mschneider
+ */
+public class Defend implements Action{
 
 	public Defend() {}
 

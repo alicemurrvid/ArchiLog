@@ -2,7 +2,11 @@ package plugins;
 
 import interfaces.Action;
 
-public class Rummage extends Action {
+/**
+ * Rummage
+ * @author mschneider
+ */
+public class Rummage implements Action {
 
 	public Rummage() {}
 

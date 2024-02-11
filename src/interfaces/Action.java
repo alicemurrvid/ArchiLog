@@ -1,8 +1,10 @@
 package interfaces;
 
-public abstract class Action {
-
-	public Action() {}
+/**
+ * Action
+ * @author mschneider
+ */
+public interface Action {
 
 	public abstract void execute();
 

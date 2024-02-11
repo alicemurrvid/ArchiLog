@@ -12,6 +12,10 @@ import plugins.Rummage;
 import plugins.Take;
 import stat.Stat;
 
+/**
+ * Person
+ * @author mschneider
+ */
 public class Person {
 
 	// Attributs of a Character
@@ -43,6 +47,7 @@ public class Person {
 		this.basicsStats = bs;
 	}
 	
+
 	/**
 	 * remove all Stats of the Character
 	 * recalculate all of them in function is item
@@ -76,13 +81,8 @@ public class Person {
 	 * @return true if the Charactere is dead
 	 * 		   false else
 	 */
-	public boolean takeDamage(int damage) {
-		if(this.getLifePoint() <= damage) {
-			return true;
-		} else {
-			this.lifePoint -= damage;
-			return false;
-		}
+	public void takeDamage(int damage) {
+		this.lifePoint -= damage; 
 	}
 
 	/************** Setters **************/
@@ -118,6 +118,10 @@ public class Person {
 
 	public int getLifePoint() {
 		return this.lifePoint;
+	}
+	
+	public ArrayList<Stat> getStats() {
+		return this.stats;
 	}
 	
 	/************** To String **************/

@@ -4,6 +4,10 @@ import java.util.ArrayList;
 
 import stat.Stat;
 
+/**
+ * Item
+ * @author mschneider
+ */
 public class Item {
 	
 	// Attributs of a Item
