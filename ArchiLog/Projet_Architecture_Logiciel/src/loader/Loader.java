@@ -97,8 +97,7 @@ public class Loader {
 			JSONObject cate = (JSONObject) ((JSONObject) jsonParser.parse(reader)).get(category);
 			Set<String> types = cate.keySet();
 			for (String type1 : types) {
-				Object type2 = (Object) type1;
-				JSONObject typeObj = (JSONObject) cate.get((Object) type2);
+				JSONObject typeObj = (JSONObject) cate.get(type1);
 				Set<String> keys = typeObj.keySet();
 				List<PluginDescriptor> listPlugin = new ArrayList<>();
 				for (String key : keys) {

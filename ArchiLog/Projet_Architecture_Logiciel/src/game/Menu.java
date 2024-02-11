@@ -5,7 +5,9 @@ import java.awt.CardLayout;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -17,6 +19,7 @@ import javax.swing.JTextField;
 
 import character.Person;
 import interfaces.IContent;
+import interfaces.IEvenement;
 import loader.Loader;
 import loader.PluginDescriptor;
 import stat.Stat;
@@ -38,7 +41,13 @@ public class Menu {
 	}
 	
 	private Run run = Run.getInstance();
+	private Map<String, IEvenement> evenements = new HashMap<String, IEvenement>(); 
 	
+
+	public Map<String, IEvenement> getEvenements() {
+		return evenements;
+	}
+
 	/**
 	 * Create the plugin panel
 	 * @param plugInsDescription
@@ -59,48 +68,76 @@ public class Menu {
 		
 		for (List<PluginDescriptor> plugInsDescription : pluginsType) {
 			for (PluginDescriptor descr : plugInsDescription) {			
-				poorDataRepresentation.setText(poorDataRepresentation.getText()+"\n"+descr.name+" : "+descr.description);
+				if (! descr.autorun ) {
 				
-				JPanel panelTer = new JPanel();
-				
-				Image icon = new ImageIcon("src/data/coche-verte.png").getImage();
-				icon = icon.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
-				
-				JLabel image = new JLabel(new ImageIcon(icon));
-				image.setVisible(false);
-	
-				JButton jb = new JButton(descr.name);
-				panelTer.add(jb);
-				panelTer.add(image);
-	
-				if (descr.getType().equals("Content")) {
-					jb.addActionListener(e -> { 
+					poorDataRepresentation.setText(poorDataRepresentation.getText()+"\n"+descr.name+" : "+descr.description);
+					
+					JPanel panelTer = new JPanel();
+					
+					Image icon = new ImageIcon("src/data/coche-verte.png").getImage();
+					icon = icon.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+					
+					JLabel image = new JLabel(new ImageIcon(icon));
+					image.setVisible(false);
+		
+					JButton jb = new JButton(descr.name);
+					panelTer.add(jb);
+					panelTer.add(image);
+		
+					if (descr.getType().equals("Content")) {
+						jb.addActionListener(e -> { 
+							IContent plugin  = (IContent) Loader.getInstance().getPlugin(descr);
+							plugin.initialize();
+							if (panelTer.getComponent(1).isVisible()) {
+								panelTer.getComponent(1).setVisible(false);
+								plugin.remove();			
+							} else {
+								panelTer.getComponent(1).setVisible(true);
+								plugin.add();
+							}
+						});
+					} else if (descr.getType().equals("GamePlay")) {
+						jb.addActionListener(e -> { 
+							if (panelTer.getComponent(1).isVisible()) {
+								panelTer.getComponent(1).setVisible(false);
+								//Run.getInstance().removePeopleOnList(list);
+							} else {
+								panelTer.getComponent(1).setVisible(true);
+								//Run.getInstance().addPeopleOnList(list);
+							}
+						});
+					} else if (descr.getType().equals("Evenement")) {
+						jb.addActionListener(e -> { 
+							IEvenement plugin  = (IEvenement) Loader.getInstance().getPlugin(descr);
+							if (panelTer.getComponent(1).isVisible()) {
+								panelTer.getComponent(1).setVisible(false);
+								this.evenements.remove(descr.name);			
+							} else {
+								panelTer.getComponent(1).setVisible(true);
+								this.evenements.put(descr.name, plugin);
+							}
+						});
+					} else if (descr.getType().equals("Action")) {
+						
+					}
+					
+					panel.add(poorDataRepresentation, BorderLayout.CENTER);
+					panelBis.add(panelTer);
+				} else {
+					if (descr.getType().equals("Content")) {
 						IContent plugin  = (IContent) Loader.getInstance().getPlugin(descr);
 						plugin.initialize();
-						if (panelTer.getComponent(1).isVisible()) {
-							panelTer.getComponent(1).setVisible(false);
-							plugin.remove();			
-						} else {
-							panelTer.getComponent(1).setVisible(true);
-							plugin.add();
-						}
-						System.out.println(Run.getInstance().getPeople());
-					});
-				} else if (descr.getType().equals("GamePlay")) {
-					jb.addActionListener(e -> { 
-						if (panelTer.getComponent(1).isVisible()) {
-							panelTer.getComponent(1).setVisible(false);
-							//Run.getInstance().removePeopleOnList(list);
-						} else {
-							panelTer.getComponent(1).setVisible(true);
-							//Run.getInstance().addPeopleOnList(list);
-						}
-					});
+						plugin.add();
+					} else if (descr.getType().equals("GamePlay")) {
+					 
+					} else if (descr.getType().equals("Evenement")) {
+						IEvenement plugin  = (IEvenement) Loader.getInstance().getPlugin(descr);
+						this.evenements.put(descr.name, plugin);
+					} else if (descr.getType().equals("Action")) {
+						
+					}
 				}
-				
-				panel.add(poorDataRepresentation, BorderLayout.CENTER);
-				panelBis.add(panelTer);
-			}
+			} 
 		}
 		panel.add(panelBis, BorderLayout.SOUTH);
 		return panel;

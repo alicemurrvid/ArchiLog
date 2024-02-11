@@ -8,7 +8,7 @@ public class PluginDescriptor {
 	String path;
 	public String name;
 	public String description;
-	boolean autorun;
+	public boolean autorun;
 	String type;
 	
 	public PluginDescriptor(String name, String path, String description, boolean autorun, String type) {

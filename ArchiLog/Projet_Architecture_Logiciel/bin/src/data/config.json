@@ -1,0 +1,46 @@
+{
+	"DataLoad":{
+		"Dur" : {
+			"autorun": false,
+			"description" : "Initialize Items and Person",
+			"name" : "DataLoaderDur",
+			"path" : "plugins.DataLoaderDur"
+		},
+		"JSON" : {
+			"autorun" : false,
+			"description" : "Initialize Items and Person by JSONFile",
+			"name" : "DataLoader",
+			"path" : "plugins.DataLoader"
+		}
+	},
+	"Plugin" : {
+		"Content" : {
+			"Item unique" : {
+				"autorun": false,
+				"description" : "Add the Unique Object",
+				"name" : "The unique",
+				"path" : "plugins.PersonPlus"
+			},
+			"Person+" : {
+				"autorun" : false,
+				"description" : "Add a new people to figth against",
+				"name": "Person+",
+				"path": "plugins.PersonPlus"
+			}
+		},
+		"GamePlay" : {
+			"Affichage stats" : {
+				"autorun": false,
+				"description" : "Hide all the stats",
+				"name" : "Stats hidding",
+				"path" : "plugins.PersonPlus"
+			},
+			"Mode difficile" : {
+				"autorun": false,
+				"description" : "Add the HardMode off the game",
+				"name" : "HardMode",
+				"path" : "plugins.PersonPlus"
+			}
+		}
+	}
+}

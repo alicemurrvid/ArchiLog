@@ -1,10 +1,12 @@
 package game;
 
 import java.awt.BorderLayout;
+import java.awt.CardLayout;
 import java.util.ArrayList;
 import java.util.Iterator;
 
 import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
@@ -111,11 +113,51 @@ public class Run {
 		JPanel panel = new JPanel();
 		BorderLayout layout = new BorderLayout();
 		panel.setLayout(layout);
-		
-		//TODO a finir
 		JPanel panelCurrentPersonInfo = this.diplayPerson(this.currentPerson);
+
+		JPanel startPanel = new JPanel();
+		startPanel.setLayout(new BorderLayout());
+		
+		JPanel secondPanel = new JPanel();
+		CardLayout cardLayout = new CardLayout();
+		secondPanel.setLayout(cardLayout);
+		
+		startPanel.add(secondPanel, BorderLayout.CENTER);
+		
+		JButton nextBtn = new JButton("Start the fight");
+		JButton nextBtn2 = new JButton("Start the rest");
+		nextBtn2.setVisible(false);
+		
+		nextBtn.addActionListener(e-> {
+			if (this.currentPerson.getLifePoint() > 0) {
+				nextBtn.setVisible(false);
+				JPanel combatPanel = Menu.getInstance().getEvenements().get("CombatEvent").eventInterface();
+				secondPanel.add("combatPanel", combatPanel);
+				cardLayout.show(secondPanel, "combatPanel");
+				nextBtn2.setVisible(true);
+			}
+		});
+		
+		nextBtn2.addActionListener(e-> {
+			if (this.currentPerson.getLifePoint() > 0) {
+				nextBtn2.setVisible(false);
+				JPanel horsCombatPanel = Menu.getInstance().getEvenements().get("HorsCombatEvent").eventInterface();
+				secondPanel.add("horsCombatPanel", horsCombatPanel);
+				cardLayout.show(secondPanel, "horsCombatPanel");
+				nextBtn.setVisible(true);
+			}
+		});
+		
+		JPanel panelButton = new JPanel();
+		panelButton.add(nextBtn);
+		panelButton.add(nextBtn2);
+		startPanel.add(panelButton, BorderLayout.SOUTH);
 		
 		panel.add(panelCurrentPersonInfo, BorderLayout.WEST);
+		panel.add(startPanel, BorderLayout.CENTER);
+
+		
+		
 		
 		return panel;
 	}
@@ -125,7 +167,7 @@ public class Run {
 	 * @param p
 	 * @return panel : JPanel
 	 */
-	private JPanel diplayPerson(Person p) {
+	public JPanel diplayPerson(Person p) {
 		JPanel panel = new JPanel();
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 

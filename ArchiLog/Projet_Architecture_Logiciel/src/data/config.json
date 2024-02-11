@@ -41,6 +41,23 @@
 				"name" : "HardMode",
 				"path" : "plugins.PersonPlus"
 			}
+		},
+		"Action" : {
+
+		},
+		"Evenement": {
+			"CombatEvent" : {
+				"autorun": true,
+				"description" : "Add combat event",
+				"name" : "CombatEvent",
+				"path" : "plugins.CombatEvent"
+			},
+			"HorsCombatEvent" : {
+				"autorun": true,
+				"description" : "Add hors combat event",
+				"name" : "HorsCombatEvent",
+				"path" : "plugins.HorsCombatEvent"
+			}
 		}
 	}
 }
